@@ -22,9 +22,9 @@ app.post("/api/roast", (req, res) => {
     .sort(() => 0.5 - Math.random())
     .slice(0, 3);
 
-  const roasts = shuffled.map(
-    (meme: string) => `${name}, ${meme}`
-  );
+  const roasts = shuffled
+  .slice(0, 3)
+  .map((meme) => `😂 ${meme}`);
 
   res.json({ roast: roasts });
 });
