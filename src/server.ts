@@ -23,7 +23,7 @@ app.post("/api/roast", (req, res) => {
     .slice(0, 3);
 
   const roasts = shuffled.map(
-    (meme: string) => `${name} → ${meme}`
+    (meme: string) => `${name}, ${meme}`
   );
 
   res.json({ roast: roasts });
