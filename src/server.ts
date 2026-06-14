@@ -3,11 +3,13 @@ import cors from "cors";
 import dotenv from "dotenv";
 import { GoogleGenAI } from "@google/genai";
 
+
 dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
+
 
 const ai = new GoogleGenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -30,8 +32,15 @@ app.post("/api/roast", async (req, res) => {
     // ===================================
     // মডেলের নাম 'gemini-2.5-flash' দিয়ে ট্রাই করুন, এটি নতুন SDK-র জন্য বেস্ট
     const roastResult = await ai.models.generateContent({
-      model: "gemini-2.5-flash", 
-      contents: `Generate 3 funny roast lines about "${name}". Rules: Funny, meme style, no hate, add emojis, only 3 lines.`,
+      model: "gemini-2.5-flash",
+      contents: `তুমি একজন চরম লেভেলের ট্রোলার এবং রোস্ট মাস্টার। তোমার কাজ হলো "${name}" নামের একজন মানুষকে নিয়ে ৩ লাইনের মারাত্মক ফানি ও সার্কাস্টিক রোস্ট তৈরি করা।
+
+নিয়মাবলী:
+- সম্পূর্ণ বাংলা ভাষায় (Bengali Language) লিখতে হবে।
+- ভাষা হবে একদম খাঁটি ফেসবুক মিম স্টাইল এবং বন্ধুদের আড্ডার মতো হাস্যকর।
+- কোনো নোংরা গালি বা হেট স্পিচ দেওয়া যাবে না, কিন্তু ট্রোলটা যেন চরম হাসির হয়।
+- প্রতিটা লাইনে ফানি ইমোজি ব্যবহার করো 😂🔥💀
+- ঠিক ৩টি আলাদা লাইন তৈরি করবে।`,
     });
 
     const roastText = roastResult.text ?? "";
